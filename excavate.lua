@@ -15,12 +15,26 @@ local function isLiquid(func_inspect)
     return false
 end
 
+local function inventoryGetSpace()
+    local space = 0
+
+    for i = 1, 16 do
+        turtle.select(i)
+        if turtle.getItemDetail() == nil then
+            space = space + 1
+        end
+    end
+    turtle.select(1)
+    return space
+end
+
 local function needToComeBack()
     if excavate.needFuel == true or excavate.needPlace == true then return true end
     if turtle.getDistanceToComeBack() + 3 >= turtle.getFuelLevel() then
         excavate.needFuel = true
         obj.saveObj(_EXCAVATE_FILE, excavate)
     end
+    inventory.space = inventoryGetSpace()
     if inventory.space ~= nil and inventory.space < 3 then
         excavate.needPlace = true
         obj.saveObj(_EXCAVATE_FILE, excavate)
