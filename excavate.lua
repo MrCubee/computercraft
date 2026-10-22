@@ -187,10 +187,11 @@ while true do
             print("Error the turtle cant move.")
             return
         end
+    else
+        turtle.digDown()
+        if not turtle.down() then return false end
+        turtle.turnRight(2)
     end
-    turtle.digDown()
-    if not turtle.down() then return false end
-    turtle.turnRight(2)
 end
 excavate.size = nil
 if deepComeBack() then
