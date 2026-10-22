@@ -360,6 +360,7 @@ function turtle.comeBack(count, func_before, func_after)
         count = #rpos.lastPos
     end
     local prev = popFromHistory()
+    local prevHistorySaved = historySaved
     historySaved = false
     while count > 0 and prev ~= nil do
         if not turtle.goTo(prev, func_before, func_after) then
@@ -371,6 +372,6 @@ function turtle.comeBack(count, func_before, func_after)
         count = count - 1;
     end
     if not turtle.goTo(originPoint, func_before, func_after) then return false end
-    historySaved = true
+    historySaved = prevHistorySaved
     return true
 end
