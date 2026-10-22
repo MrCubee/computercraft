@@ -99,10 +99,10 @@ local function digLayer()
     else
         startZ = currentZ
     end
-    if currentZ % 2 == 1 then
+    if startZ % 2 == 1 then
         startX = excavate.size - 1 - currentX
     else
-        startX = 0
+        startX = currentX
     end
     for iz = startZ, excavate.size - 1 do
         for ix = startX, excavate.size - 1 do
@@ -114,7 +114,7 @@ local function digLayer()
         startX = 0
         if iz == excavate.size - 1 then break end
         if needToComeBack() then return true end
-        if iz % 2 == 0 then
+        if (currentY % 2 == 0 and iz % 2 == 0) then
             turtle.turnRight()
             dig(true)
             if not turtle.forward() then return false end
