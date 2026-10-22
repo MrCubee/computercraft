@@ -15,33 +15,6 @@ local function isLiquid(func_inspect)
     return false
 end
 
---[[
-local function collect()
-    local space = 0
-    local nItems = 0
-    local count
-    local nItemDiff
-
-    for i = 1, 16 do
-        count = turtle.getItemCount(i)
-        if count == 0 then
-            space = space + 1
-        else
-            nItems = nItems + count
-        end
-    end
-    inventory.space = space
-    if inventory.collectedCount ~= nil then
-        nItemDiff = nItems - inventory.collectedCount
-        inventory.collectedCount = inventory.collectedCount + nItems
-    else
-        nItemDiff = nItems
-        inventory.collectedCount = nItems
-    end
-    return nItemDiff
-end
-]]
-
 local function needToComeBack()
     if excavate.needFuel == true or excavate.needPlace == true then return true end
     if turtle.getDistanceToComeBack() + 3 >= turtle.getFuelLevel() then
